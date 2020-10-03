@@ -9,6 +9,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import HomeScreen from "./Screens/Home";
 import Logo from "./Assets/Logo";
 import Icon from "./Components/Icon";
+import Card from "./Components/Card";
 
 const Stack = createStackNavigator();
 
@@ -48,7 +49,7 @@ const screenOptions: StackNavigationOptions = {
 };
 
 const TestScreen = () => {
-  return <Text>hello </Text>;
+  return <View>Test Page!</View>;
 };
 
 function App() {

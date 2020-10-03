@@ -2,18 +2,15 @@ import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { StackNavigationProp } from "@react-navigation/stack";
+import Card from "../Components/Card";
 type Props = {
   navigation: StackNavigationProp<any, "About">;
 };
+
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Gideon, Welcome to React Native!</Text>
-      <Button
-        title="Test Screen"
-        onPress={() => navigation.push("TestScreen")}
-      />
-      <StatusBar style="auto" />
+      <Card title="Family Shopping List" subtitle="World!"></Card>
     </View>
   );
 };
