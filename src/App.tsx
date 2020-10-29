@@ -5,13 +5,17 @@ import {
   StackNavigationOptions,
 } from "@react-navigation/stack";
 import * as Expo from "expo";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Button } from "react-native";
 import HomeScreen from "./Screens/Home";
+import ShoppingList from "./Screens/ShoppingList";
 import Logo from "./Assets/Logo";
 import Icon from "./Components/Icon";
-import Card from "./Components/Card";
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  Home: undefined;
+  ShoppingList: { listId: string; title: string; subtitle?: string };
+};
+const Stack = createStackNavigator<RootStackParamList>();
 
 const HeaderLogo: React.FC = () => {
   return (
@@ -43,27 +47,24 @@ const SearchButton: React.FC = () => {
     </TouchableOpacity>
   );
 };
+
 const screenOptions: StackNavigationOptions = {
   headerTitle: () => <HeaderLogo />,
   headerRight: () => <SearchButton />,
 };
 
-const TestScreen = () => {
-  return <View>Test Page!</View>;
-};
-
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
-          name="About"
+          name="Home"
           component={HomeScreen}
           options={screenOptions}
         />
         <Stack.Screen
-          name="TestScreen"
-          component={TestScreen}
+          name="ShoppingList"
+          component={ShoppingList}
           options={screenOptions}
         />
       </Stack.Navigator>
