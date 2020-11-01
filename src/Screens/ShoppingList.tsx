@@ -1,9 +1,17 @@
 import React, { useState, ChangeEvent, useCallback, useEffect } from "react";
-import { View, TextInput, StyleSheet, Image, Text } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 import { CardHeader, CardFooter } from "../Components/Card";
 import ListRenderer from "../Components/ListRenderer";
+import Icon from "../Components/Icon";
+import { Entypo } from "@expo/vector-icons";
 
 export interface Product {
   id: number;
@@ -46,49 +54,78 @@ const productsMeta: Array<Product> = [
     pickedUp: true,
   },
 ];
-
+type AddIcon = {
+  bgColor: string;
+  color: string;
+};
+const AddProductIcon: React.FC<AddIcon> = ({ bgColor, color }) => {
+  return (
+    <View
+      style={{
+        backgroundColor: bgColor,
+        borderRadius: 36 / 2,
+        width: 36,
+        height: 36,
+        right: 40,
+      }}
+    >
+      <Entypo
+        style={{
+          width: 20,
+          height: 14,
+          padding: 6,
+        }}
+        name="add-to-list"
+        color={color}
+        size={20}
+      />
+    </View>
+  );
+};
 const SearchInput: React.FC = () => {
   const [textToSearch, setTextToSearch] = useState<string>("Add Product");
-
+  const [IconBgColor, setBgColor] = useState<string>("white");
+  const [color, setColor] = useState<string>("#666666");
   const changeTextSearch = useCallback(() => {
     setTextToSearch(textToSearch);
   }, []);
 
   return (
-    <View style={{ padding: "10px", borderWidth: 2, borderColor: "solid" }}>
-      <label
-        style={{
-          padding: "5px",
-          position: "relative",
-          top: "-20px",
-          left: "20px",
-          backgroundColor: "white",
-        }}
-      >
-        <Text> Add Product</Text>
-      </label>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#fff",
+        marginBottom: "16px",
+      }}
+    >
       <TextInput
         style={{
-          height: 40,
+          flex: 1,
+          height: 56,
           borderColor: "#DADADA",
           borderRadius: 1,
           borderWidth: 1,
-          marginBottom: "16px",
+          fontSize: 16,
+          padding: 16,
         }}
+        onFocus={() => {
+          setBgColor("#2F80ED");
+          setColor("white");
+        }}
+        onBlur={() => {
+          setBgColor("white");
+          setColor("#666666");
+        }}
+        textAlignVertical="center"
         placeholder={textToSearch}
         onChange={changeTextSearch}
         editable
         maxLength={40}
       />
-    </View>
-  );
-};
-
-const PickedUpProducts: React.FC<Product> = ({ title }) => {
-  console.log(` pickedUp ${title}`);
-  return (
-    <View style={{ marginTop: "8px" }}>
-      <Text>picked up</Text>
+      <AddProductIcon color={color} bgColor={IconBgColor} />
     </View>
   );
 };
@@ -127,3 +164,5 @@ const ShoppingList: React.FC<Props> = ({
 };
 
 export default ShoppingList;
+
+const styles = StyleSheet.create({});
