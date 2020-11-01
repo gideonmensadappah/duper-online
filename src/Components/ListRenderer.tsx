@@ -47,7 +47,7 @@ const ProductsToByList: React.FC<ProductsToByList> = ({
 
   return (
     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-      <Image source={img} style={{ width: "10%", height: "10vw" }} />
+      <Image source={img} style={{ width: 84, height: 56, borderRadius: 4 }} />
       <Text>
         <Text>{title}</Text>
         <Text>{description}</Text>
@@ -92,7 +92,7 @@ const PickedUpList: React.FC<PickedUpListProp> = ({
         justifyContent: "space-between",
       }}
     >
-      <Image source={img} style={{ width: "10%", height: "10vw" }} />
+      <Image source={img} style={{ width: 84, height: 56, borderRadius: 4 }} />
       <Text>
         <Text>{title}</Text>
         <Text>{description}</Text>
